@@ -31,7 +31,10 @@ class Validation(TimeStampedModel):
         indexes = [models.Index(fields=['sha256'])]
 
     blob = DeconstructableFileField(
-        blank=True, storage=_get_validation_blob_storage, upload_to=_get_validation_blob_prefix
+        blank=True,
+        storage=_get_validation_blob_storage,
+        upload_to=_get_validation_blob_prefix,
+        max_length=256,
     )
     sha256 = models.CharField(
         max_length=64, unique=True, validators=[RegexValidator(f'^{SHA256_REGEX}$')]

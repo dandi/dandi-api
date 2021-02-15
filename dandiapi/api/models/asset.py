@@ -30,7 +30,10 @@ class AssetBlob(TimeStampedModel):
     SHA256_REGEX = r'[0-9a-f]{64}'
 
     blob = DeconstructableFileField(
-        blank=True, storage=_get_asset_blob_storage, upload_to=_get_asset_blob_prefix
+        blank=True,
+        storage=_get_asset_blob_storage,
+        upload_to=_get_asset_blob_prefix,
+        max_length=256,
     )
     sha256 = models.CharField(max_length=64, validators=[RegexValidator(f'^{SHA256_REGEX}$')])
 
